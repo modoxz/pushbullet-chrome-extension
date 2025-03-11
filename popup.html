@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pushbullet</title>
+  <link rel="stylesheet" href="css/popup.css">
+  <style>
+    /* Hide all sections by default to prevent flashing */
+    #loading-section, #login-section, #main-section {
+      display: none;
+    }
+    
+    /* Show loading section by default */
+    #loading-section {
+      display: flex;
+    }
+    
+    .disclaimer {
+      font-size: 11px;
+      color: #666;
+      margin-top: 12px;
+      text-align: center;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Section -->
+  <div id="loading-section">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+  
+  <!-- Login Section -->
+  <div id="login-section">
+    <h1>Pushbullet</h1>
+    <p>Please enter your Access Token to continue.</p>
+    <p>You can find your Access Token in your <a href="https://www.pushbullet.com/#settings/account" target="_blank">Pushbullet account settings</a> under Access Tokens.</p>
+    <div class="form-group">
+      <input type="text" id="api-key" placeholder="Access Token">
+    </div>
+    <div class="form-group">
+      <input type="text" id="device-nickname" placeholder="Device Nickname (e.g., My Chrome)">
+    </div>
+    <div class="form-group">
+      <button id="save-api-key">Save</button>
+    </div>
+    <p class="disclaimer">This is an unofficial extension and is not affiliated with, endorsed by, or connected to Pushbullet Inc.</p>
+  </div>
+  
+  <!-- Main Section -->
+  <div id="main-section">
+    <div class="header">
+      <div class="user-info">
+        <img id="user-image" src="" alt="User Image">
+        <span id="user-name">User Name</span>
+      </div>
+      <button id="logout">Logout</button>
+    </div>
+    
+    <div class="push-form">
+      <h2>Send a Push</h2>
+      
+      <div class="form-group">
+        <label for="push-type">Push Type:</label>
+        <select id="push-type">
+          <option value="note">Note</option>
+          <option value="link">Link</option>
+        </select>
+      </div>
+      
+      <div id="note-form">
+        <div class="form-group">
+          <input type="text" id="note-title" placeholder="Title">
+        </div>
+        <div class="form-group">
+          <textarea id="note-body" placeholder="Body"></textarea>
+        </div>
+      </div>
+      
+      <div id="link-form" style="display: none;">
+        <div class="form-group">
+          <input type="text" id="link-title" placeholder="Title">
+        </div>
+        <div class="form-group">
+          <input type="text" id="link-url" placeholder="URL">
+        </div>
+        <div class="form-group">
+          <textarea id="link-body" placeholder="Comment (optional)"></textarea>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="target-device">Send to:</label>
+        <select id="target-device">
+          <option value="all">All Devices</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <button id="send-push">Send</button>
+      </div>
+      
+      <div id="status-message"></div>
+    </div>
+    
+    <div class="settings">
+      <h2>Settings</h2>
+      <div class="setting-item">
+        <label for="auto-open-links">
+          <input type="checkbox" id="auto-open-links" checked>
+          Auto-open links when received
+        </label>
+      </div>
+      <div class="setting-item">
+        <label for="device-nickname-setting">Device Nickname:</label>
+        <div class="form-group">
+          <input type="text" id="device-nickname-setting" placeholder="Device Nickname">
+          <button id="update-nickname">Update</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="recent-pushes">
+      <h2>Recent Pushes</h2>
+      <div id="pushes-list"></div>
+    </div>
+    
+    <p class="disclaimer">This is an unofficial extension and is not affiliated with Pushbullet Inc.</p>
+  </div>
+  
+  <script src="js/popup.js"></script>
+</body>
+</html> 
